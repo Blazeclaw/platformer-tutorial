@@ -9,11 +9,15 @@ onready var start_position = global_position
 onready var timer := $Timer
 onready var raycast := $RayCast2D
 onready var animatedSprite := $AnimatedSprite
+onready var particles := $Particles2D
 export(int) var fall_acceleration = 1000
 export(int) var fall_speed = 3000
 export(int) var rise_acceleration = 50
 export(int) var rise_speed = 300
 export(float) var delay_time = 0.75
+
+func _ready():
+	particles.one_shot = true
 
 func _physics_process(delta: float) -> void:
 	match state:
@@ -23,20 +27,21 @@ func _physics_process(delta: float) -> void:
 		RISE: rise_state(delta)
 	
 func hover_state():
+	particles.emitting = false
 	state = FALL
 	velocity = Vector2.ZERO
 	
 func fall_state(delta: float):
 	animatedSprite.play("Falling")
 	velocity.y = move_toward(velocity.y, fall_speed, fall_acceleration * delta)
-	# position.y += move_toward(position.y, fall_speed * delta, delta) # fall_speed * delta
-
 	position.y += velocity.y * delta
+
 	if raycast.is_colliding():
 		var collision_point = raycast.get_collision_point()
 		position.y = collision_point.y
 		state = LAND
 		velocity = Vector2.ZERO
+		particles.emitting = true
 		timer.start(delay_time)
 
 func land_state():
@@ -44,6 +49,7 @@ func land_state():
 		state = RISE
 
 func rise_state(delta: float):
+	particles.emitting = false
 	animatedSprite.play("Rising")
 	velocity.y = move_toward(velocity.y, rise_speed * 10, rise_acceleration * delta)
 	# position.y = move_toward(position.y, start_position.y, rise_speed * delta)
