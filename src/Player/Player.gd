@@ -23,20 +23,20 @@ func _physics_process(_delta: float) -> void:
 	input.y = Input.get_axis("ui_up", "ui_down")
 	
 	match state:
-		MOVE: move_state(input)
+		MOVE: move_state(input, _delta)
 		CLIMB: climb_state(input)
 
-func move_state(input):
+func move_state(input, delta):
 	if is_on_ladder() and Input.is_action_just_pressed("ui_up"):
 		state = CLIMB
 	
-	apply_gravity()
+	apply_gravity(delta)
 	
 	if not horizontal_move(input):
-		apply_friction()
+		apply_friction(delta)
 		animatedSprite.animation = "Idle"
 	else:
-		apply_acceleration(input.x)
+		apply_acceleration(input.x, delta)
 		animatedSprite.animation = "Run"
 		animatedSprite.flip_h = input.x > 0
 	
@@ -52,7 +52,7 @@ func move_state(input):
 		input_jump_release()
 		input_double_jump()
 		buffer_jump()
-		fast_fall()
+		fast_fall(delta)
 	
 	var was_in_air = not is_on_floor()
 	var was_on_floor = is_on_floor()
@@ -102,12 +102,12 @@ func buffer_jump():
 		velocity.y = moveData.JUMP_FORCE
 		double_jump -= 1
 
-func fast_fall():
+func fast_fall(delta):
 	if Input.is_action_just_pressed("ui_up"):
 		buffered_jump = true
 		jumpBufferTimer.start()
 	if velocity.y > 0:
-		velocity.y += moveData.ADITIONAL_FALL_GRAVITY
+		velocity.y += moveData.ADITIONAL_FALL_GRAVITY * delta
 
 func can_jump():
 	return is_on_floor() or coyote_jump
@@ -130,15 +130,15 @@ func is_on_ladder():
 	if not collider is Ladder: return false
 	return true
 
-func apply_gravity() -> void:
-	velocity.y += moveData.GRAVITY
+func apply_gravity(delta) -> void:
+	velocity.y += moveData.GRAVITY * delta
 	velocity.y = min(velocity.y, 300)
 
-func apply_friction() -> void:
-	velocity.x = move_toward(velocity.x, 0, moveData.FRICTION)
+func apply_friction(delta) -> void:
+	velocity.x = move_toward(velocity.x, 0, moveData.FRICTION * delta)
 
-func apply_acceleration(amount: float) -> void:
-	velocity.x = move_toward(velocity.x, moveData.MAX_SPEED * amount, moveData.ACCELERATION)
+func apply_acceleration(amount, delta: float) -> void:
+	velocity.x = move_toward(velocity.x, moveData.MAX_SPEED * amount, moveData.ACCELERATION * delta)
 
 func _on_JumpBufferTimer_timeout() -> void:
 	buffered_jump = false
