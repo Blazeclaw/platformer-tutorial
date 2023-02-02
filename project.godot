@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Platformer-tutorial"
-run/main_scene="res://world.tscn"
+run/main_scene="res://src/Levels/Level1.tscn"
 config/icon="res://icon.png"
 
 [audio]
