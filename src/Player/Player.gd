@@ -17,16 +17,16 @@ onready var jumpBufferTimer := $JumpBufferTimer
 onready var coyoteJumpTimer := $CoyoteJumpTimer
 onready var remoteTransform2D := $RemoteTransform2D
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var input = Vector2.ZERO
 	input.x = Input.get_axis("ui_left", "ui_right")
 	input.y = Input.get_axis("ui_up", "ui_down")
 	
 	match state:
-		MOVE: move_state(input, _delta)
+		MOVE: move_state(input, delta)
 		CLIMB: climb_state(input)
 
-func move_state(input, delta):
+func move_state(input: Vector2, delta: float) -> void:
 	if is_on_ladder() and Input.is_action_just_pressed("ui_up"):
 		state = CLIMB
 	
@@ -48,7 +48,6 @@ func move_state(input, delta):
 	if can_jump():
 		input_jump()
 	else:
-		
 		input_jump_release()
 		input_double_jump()
 		buffer_jump()
@@ -69,75 +68,83 @@ func move_state(input, delta):
 		coyote_jump = true
 		coyoteJumpTimer.start()
 		
-func climb_state(input):
-	if not is_on_ladder(): state = MOVE
+func climb_state(input: Vector2) -> void:
+	if not is_on_ladder():
+		state = MOVE
+
 	if input.length() != 0:
 		animatedSprite.animation = "Run"
 	else:
-			animatedSprite.animation = "Idle"
+		animatedSprite.animation = "Idle"
+
 	velocity = input * moveData.CLIMB_SPEED
 	velocity = move_and_slide(velocity, Vector2.UP)
 
-func player_die():
+func player_die() -> void:
 	SoundPlayer.play_sound(SoundPlayer.HURT)
 	queue_free()
 	Events.emit_signal("player_died")
 
-func connect_camera(camera):
+func connect_camera(camera) -> void:
 	var camera_path = camera.get_path()
 	remoteTransform2D.remote_path = camera_path
 
-func input_jump_release():
+func input_jump_release() -> void:
 	if Input.is_action_just_released("ui_up") and velocity.y < moveData.JUMP_RELEASE_FORCE:
 		velocity.y = moveData.JUMP_RELEASE_FORCE
 
-func input_double_jump():
+func input_double_jump() -> void:
 	if Input.is_action_just_pressed("ui_up") and double_jump > 0:
 		SoundPlayer.play_sound(SoundPlayer.JUMP)
 		velocity.y = moveData.JUMP_FORCE
 		double_jump -= 1
 
-func buffer_jump():
+func buffer_jump() -> void:
 	if Input.is_action_just_pressed("ui_up") and double_jump > 0:
 		velocity.y = moveData.JUMP_FORCE
 		double_jump -= 1
 
-func fast_fall(delta):
+func fast_fall(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_up"):
 		buffered_jump = true
 		jumpBufferTimer.start()
+
 	if velocity.y > 0:
 		velocity.y += moveData.ADITIONAL_FALL_GRAVITY * delta
 
-func can_jump():
+func can_jump() -> bool:
 	return is_on_floor() or coyote_jump
 
-func horizontal_move(input):
+func horizontal_move(input: Vector2) -> bool:
 	return input.x != 0
 
-func reset_double_jump():
+func reset_double_jump() -> void:
 	double_jump = moveData.DOUBLE_JUMP_COUNT
 
-func input_jump():
+func input_jump() -> void:
 	if Input.is_action_just_pressed("ui_up") or buffered_jump:
 		SoundPlayer.play_sound(SoundPlayer.JUMP)
 		velocity.y = moveData.JUMP_FORCE
 		buffered_jump = false
 
-func is_on_ladder():
-	if not ladderCheck.is_colliding(): return false
+func is_on_ladder() -> bool:
+	if not ladderCheck.is_colliding():
+		return false
+
 	var collider = ladderCheck.get_collider()
-	if not collider is Ladder: return false
+	if not collider is Ladder:
+		return false
+
 	return true
 
-func apply_gravity(delta) -> void:
+func apply_gravity(delta: float) -> void:
 	velocity.y += moveData.GRAVITY * delta
 	velocity.y = min(velocity.y, 300)
 
-func apply_friction(delta) -> void:
+func apply_friction(delta: float) -> void:
 	velocity.x = move_toward(velocity.x, 0, moveData.FRICTION * delta)
 
-func apply_acceleration(amount, delta: float) -> void:
+func apply_acceleration(amount: float, delta: float) -> void:
 	velocity.x = move_toward(velocity.x, moveData.MAX_SPEED * amount, moveData.ACCELERATION * delta)
 
 func _on_JumpBufferTimer_timeout() -> void:
