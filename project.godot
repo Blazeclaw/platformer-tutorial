@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Area2D",
+"class": "BreakBlock",
+"language": "GDScript",
+"path": "res://Breakblock.gd"
+}, {
+"base": "Area2D",
 "class": "Ladder",
 "language": "GDScript",
 "path": "res://Ladder/Ladder.gd"
@@ -23,11 +28,18 @@ _global_script_classes=[ {
 "class": "PlayerMovementData",
 "language": "GDScript",
 "path": "res://src/Player/PlayerMovementData.gd"
+}, {
+"base": "Area2D",
+"class": "PowerUp",
+"language": "GDScript",
+"path": "res://src/PowerUps/PowerUp1.gd"
 } ]
 _global_script_class_icons={
+"BreakBlock": "",
 "Ladder": "",
 "Player": "",
-"PlayerMovementData": ""
+"PlayerMovementData": "",
+"PowerUp": ""
 }
 
 [application]

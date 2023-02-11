@@ -5,17 +5,19 @@ enum {MOVE, CLIMB}
 
 export(Resource) var moveData = preload("res://src/Player/DefaultPlayerMovementData.tres") as PlayerMovementData
 
-var velocity = Vector2.ZERO
-var state = MOVE
-var double_jump = 1
-var buffered_jump = false
-var coyote_jump = false
+var velocity := Vector2.ZERO
+var state := MOVE
+var double_jump: int = 1
+var buffered_jump: bool = false
+var coyote_jump: bool = false
+var powered_up: bool = false
 
 onready var animatedSprite := $AnimatedSprite
 onready var ladderCheck := $LadderCheck
 onready var jumpBufferTimer := $JumpBufferTimer
 onready var coyoteJumpTimer := $CoyoteJumpTimer
 onready var remoteTransform2D := $RemoteTransform2D
+onready var powerUpTimer := $PowerUpTimer
 
 func _physics_process(delta: float) -> void:
 	var input = Vector2.ZERO
@@ -147,8 +149,16 @@ func apply_friction(delta: float) -> void:
 func apply_acceleration(amount: float, delta: float) -> void:
 	velocity.x = move_toward(velocity.x, moveData.MAX_SPEED * amount, moveData.ACCELERATION * delta)
 
+func power_up() -> void:
+	powered_up = true
+	SoundPlayer.play_sound(SoundPlayer.POWER_UP)
+	powerUpTimer.start()
+
 func _on_JumpBufferTimer_timeout() -> void:
 	buffered_jump = false
 
 func _on_CoyoteJumpTimer_timeout() -> void:
 	coyote_jump = false
+
+func _on_PowerUpTimer_timeout() -> void:
+	powered_up = false
