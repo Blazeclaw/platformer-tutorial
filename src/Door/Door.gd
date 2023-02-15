@@ -16,6 +16,8 @@ func go_to_next_room() -> void:
 	Transitions.play_enter_transition()
 	get_tree().paused = false
 
+	GameState.lastCheckpointPosition = Vector2.ZERO
+
 	if get_tree().change_scene(target_level_path) != OK:
 		print("Scene '{0}' could not be loaded.".format([target_level_path]))
 		return

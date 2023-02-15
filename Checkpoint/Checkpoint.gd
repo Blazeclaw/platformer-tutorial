@@ -13,4 +13,4 @@ func _on_Checkpoint_body_entered(body: Node) -> void:
 		
 	animatedSprite.play("Checked")
 	active = false
-	Events.emit_signal("hit_checkpoint", position)
+	GameState.lastCheckpointPosition = global_position

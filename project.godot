@@ -54,6 +54,7 @@ default_bus_layout="res://src/Player/default_bus_layout.tres"
 
 [autoload]
 
+GameState="*res://src/Common/GameState.gd"
 SoundPlayer="*res://src/Player/SoundPlayer.tscn"
 Events="*res://Events/Events.gd"
 Transitions="*res://src/Door/Transitions.tscn"
