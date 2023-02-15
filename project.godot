@@ -12,31 +12,37 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "BreakBlock",
 "language": "GDScript",
-"path": "res://Breakblock.gd"
+"path": "res://Common/BreakBlock/Breakblock.gd"
 }, {
 "base": "Area2D",
 "class": "Ladder",
 "language": "GDScript",
 "path": "res://Ladder/Ladder.gd"
 }, {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://Levels/Level.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://src/Player/Player.gd"
+"path": "res://Player/Player.gd"
 }, {
 "base": "Resource",
 "class": "PlayerMovementData",
 "language": "GDScript",
-"path": "res://src/Player/PlayerMovementData.gd"
+"path": "res://Player/PlayerMovementData.gd"
 }, {
 "base": "Area2D",
 "class": "PowerUp",
 "language": "GDScript",
-"path": "res://src/PowerUps/PowerUp1.gd"
+"path": "res://PowerUps/BreakPowerUp.gd"
 } ]
 _global_script_class_icons={
 "BreakBlock": "",
 "Ladder": "",
+"Level": "",
 "Player": "",
 "PlayerMovementData": "",
 "PowerUp": ""
@@ -45,19 +51,19 @@ _global_script_class_icons={
 [application]
 
 config/name="Platformer-tutorial"
-run/main_scene="res://src/Levels/Level1.tscn"
+run/main_scene="res://Levels/Level1.tscn"
 config/icon="res://icon.png"
 
 [audio]
 
-default_bus_layout="res://src/Player/default_bus_layout.tres"
+default_bus_layout="res://Player/default_bus_layout.tres"
 
 [autoload]
 
-GameState="*res://src/Common/GameState.gd"
-SoundPlayer="*res://src/Player/SoundPlayer.tscn"
+GameState="*res://Common/GameState.gd"
+SoundPlayer="*res://Player/SoundPlayer.tscn"
 Events="*res://Events/Events.gd"
-Transitions="*res://src/Door/Transitions.tscn"
+Transitions="*res://Common/Transitions/Transitions.tscn"
 
 [debug]
 
@@ -74,6 +80,7 @@ window/stretch/mode="2d"
 [global]
 
 phy=false
+main=false
 
 [gui]
 
