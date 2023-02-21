@@ -23,6 +23,7 @@ _data = {
 }
 
 [node name="Level1" instance=ExtResource( 1 )]
+position = Vector2( 52, -1 )
 scale = Vector2( 0.996232, 1.00176 )
 
 [node name="Player" parent="." index="0"]

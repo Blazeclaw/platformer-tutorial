@@ -10,3 +10,4 @@ func _on_PowerUp_body_entered(player: Node) -> void:
 		# power up the player
 		player.power_up()
 		queue_free()
+	#if Player.powered_up player get_node ("PlayerGreenSkin")

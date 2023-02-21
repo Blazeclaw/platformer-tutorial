@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Common/BreakBlock/Breakblock.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles_packed.png" type="Texture" id=2]
+[ext_resource path="res://Common/BreakBlock/Explosion.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=2]
 
@@ -11,8 +12,10 @@ extents = Vector2( 9, 9 )
 [node name="Breakblock" type="Area2D"]
 collision_mask = 2
 script = ExtResource( 1 )
+deathParticle = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -9 )
 shape = SubResource( 2 )
 
@@ -23,6 +26,7 @@ region_enabled = true
 region_rect = Rect2( 162, 0, 18, 18 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]

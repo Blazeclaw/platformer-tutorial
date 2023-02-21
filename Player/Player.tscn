@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Player/playerGreenSkin.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Player/PlayerBlueSkin.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Player/FastPlayerMovementData.tres" type="Resource" id=3]
 

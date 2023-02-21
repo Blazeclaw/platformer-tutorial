@@ -1,9 +1,9 @@
 extends Node
 
-const HURT = preload("res://Player/hurt.wav")
-const JUMP = preload("res://Player/jump.wav")
-const POWER_UP = preload("res://Player/power_up.wav")
-
+const HURT = preload("res://sounds/hurt.wav")
+const JUMP = preload("res://sounds/jump.wav")
+const POWER_UP = preload("res://sounds/power_up.wav")
+const EXPLOSION = preload("res://sounds/explosion.wav")
 onready var audioPlayers = $AudioPlayer
 
 func play_sound(sound):
