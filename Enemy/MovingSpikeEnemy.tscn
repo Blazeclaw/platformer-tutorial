@@ -71,7 +71,12 @@ position = Vector2( -1, -1 )
 rotate = false
 loop = false
 
-[node name="Enemy" type="Node2D" parent="PathFollow2D"]
+[node name="Enemy" type="KinematicBody2D" parent="PathFollow2D" groups=["enemies"]]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Enemy"]
+shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="PathFollow2D/Enemy"]
 texture = ExtResource( 1 )

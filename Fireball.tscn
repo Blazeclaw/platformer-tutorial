@@ -29,14 +29,14 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 180.0
 angle_random = 0.92
-scale = 0.8
+scale = 0.6
 scale_curve = SubResource( 5 )
 color = Color( 1, 0.494118, 0, 1 )
 hue_variation = 0.13
 hue_variation_random = 0.16
 
 [sub_resource type="CircleShape2D" id=11]
-radius = 6.0
+radius = 4.0
 
 [node name="Fireball" type="Area2D"]
 collision_layer = 4

@@ -1,5 +1,6 @@
 tool
 extends Path2D
+class_name MovingSpikeEnemy
 
 enum ANIMATION_TYPE{
 	LOOP,
