@@ -4,20 +4,19 @@
 [ext_resource path="res://assets/tiles_packed.png" type="Texture" id=2]
 [ext_resource path="res://Common/BreakBlock/Explosion.tscn" type="PackedScene" id=3]
 
-[sub_resource type="RectangleShape2D" id=2]
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 9 )
 
-[node name="Breakblock" type="Area2D"]
+[sub_resource type="RectangleShape2D" id=2]
+
+[node name="Breakblock" type="StaticBody2D"]
 collision_mask = 2
 script = ExtResource( 1 )
 deathParticle = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -9 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -9 )
@@ -25,12 +24,12 @@ texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 162, 0, 18, 18 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
+[node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 position = Vector2( 0, -9 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
-[connection signal="body_entered" from="." to="." method="_on_Breakblock_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Breakblock_body_entered"]

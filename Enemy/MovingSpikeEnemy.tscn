@@ -79,6 +79,7 @@ region_enabled = true
 region_rect = Rect2( 192, 0, 24, 24 )
 
 [node name="Hitbox" parent="PathFollow2D/Enemy" instance=ExtResource( 2 )]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Enemy/Hitbox"]
 shape = SubResource( 2 )

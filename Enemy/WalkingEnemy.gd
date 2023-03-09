@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name WalkingEnemy
 
 export (int) var moveSpeed = 25
 var direction := Vector2.RIGHT

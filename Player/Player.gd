@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name Player
 
+const FIREBALL_SCENE = preload("res://Fireball.tscn")
+
 enum {MOVE, CLIMB}
 
 export(Resource) var moveData = preload("res://Player/DefaultPlayerMovementData.tres") as PlayerMovementData
@@ -18,12 +20,13 @@ onready var jumpBufferTimer := $JumpBufferTimer
 onready var coyoteJumpTimer := $CoyoteJumpTimer
 onready var remoteTransform2D := $RemoteTransform2D
 onready var powerUpTimer := $PowerUpTimer
+onready var projectileSpawnPosition := $ProjectileSpawnPosition
 
 func _physics_process(delta: float) -> void:
 	var input = Vector2.ZERO
 	input.x = Input.get_axis("ui_left", "ui_right")
 	input.y = Input.get_axis("ui_up", "ui_down")
-	
+
 	match state:
 		MOVE: move_state(input, delta)
 		CLIMB: climb_state(input)
@@ -40,7 +43,7 @@ func move_state(input: Vector2, delta: float) -> void:
 	else:
 		apply_acceleration(input.x, delta)
 		animatedSprite.animation = "Run"
-		animatedSprite.flip_h = input.x > 0
+		global_transform.x.x = input.x
 	
 	if is_on_floor():
 		reset_double_jump()
@@ -69,6 +72,12 @@ func move_state(input: Vector2, delta: float) -> void:
 	if just_left_ground and velocity.y >= 0:
 		coyote_jump = true
 		coyoteJumpTimer.start()
+
+	if Input.is_action_just_pressed("attack"):
+		var fireball = FIREBALL_SCENE.instance()
+		fireball.global_position = projectileSpawnPosition.global_position
+		fireball.direction = global_transform.x
+		get_tree().current_scene.add_child(fireball)
 		
 func climb_state(input: Vector2) -> void:
 	if not is_on_ladder():

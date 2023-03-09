@@ -1,4 +1,4 @@
-extends Area2D
+extends StaticBody2D
 class_name BreakBlock
 
 export var deathParticle: PackedScene
