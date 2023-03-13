@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://assets/fire_particle.png" type="Texture" id=1]
-[ext_resource path="res://Fireball.gd" type="Script" id=3]
+[ext_resource path="res://Player/Fireball.gd" type="Script" id=1]
+[ext_resource path="res://assets/fire_particle.png" type="Texture" id=2]
+[ext_resource path="res://Player/Fireball Explosion.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 
@@ -41,8 +42,8 @@ radius = 4.0
 [node name="Fireball" type="Area2D"]
 collision_layer = 4
 collision_mask = 9
-priority = 1.0
-script = ExtResource( 3 )
+script = ExtResource( 1 )
+deathParticle = ExtResource( 3 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 2 )
@@ -50,9 +51,10 @@ amount = 32
 lifetime = 0.2
 local_coords = false
 process_material = SubResource( 3 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 11 )
 
+[connection signal="area_entered" from="." to="." method="_on_Fireball_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Fireball_body_entered"]

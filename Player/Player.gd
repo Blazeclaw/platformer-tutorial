@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Player
 
-const FIREBALL_SCENE = preload("res://Fireball.tscn")
+const FIREBALL_SCENE = preload("res://Player/Fireball.tscn")
 
 enum {MOVE, CLIMB}
 

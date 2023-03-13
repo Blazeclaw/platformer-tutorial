@@ -5,6 +5,7 @@ const JUMP = preload("res://sounds/jump.wav")
 const POWER_UP = preload("res://sounds/power_up.wav")
 const EXPLOSION = preload("res://sounds/explosion.wav")
 const FIREBALL = preload("res://sounds/fireball.wav")
+
 onready var audioPlayers = $AudioPlayer
 
 func play_sound(sound):

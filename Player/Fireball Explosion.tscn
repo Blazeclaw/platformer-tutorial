@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/fire_particle.png" type="Texture" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 3.21
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 70.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 120.0
+damping_random = 1.0
+scale = 0.25
+scale_random = 0.3
+scale_curve = SubResource( 2 )
+color = Color( 0.988235, 0.556863, 0.0235294, 1 )
+hue_variation = 0.13
+hue_variation_random = 1.0
+
+[node name="Particle2D" type="Particles2D"]
+amount = 16
+lifetime = 0.5
+explosiveness = 1.0
+process_material = SubResource( 3 )
+texture = ExtResource( 1 )

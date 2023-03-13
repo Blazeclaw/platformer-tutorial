@@ -100,11 +100,5 @@ target_level_path = "res://Levels/Level2.tscn"
 [node name="StompEnemy" parent="." index="24" instance=ExtResource( 8 )]
 position = Vector2( 270, 18 )
 
-[node name="Spikes6" parent="." index="25" instance=ExtResource( 3 )]
-position = Vector2( 918, 198 )
-
-[node name="Spikes7" parent="." index="26" instance=ExtResource( 3 )]
-position = Vector2( 945, 72 )
-
-[node name="PowerUps" parent="." index="27" instance=ExtResource( 11 )]
+[node name="PowerUps" parent="." index="25" instance=ExtResource( 11 )]
 position = Vector2( 198, 0 )

@@ -14,10 +14,10 @@ script = ExtResource( 2 )
 moveData = ExtResource( 3 )
 
 [node name="ProjectileSpawnPosition" type="Node2D" parent="."]
-position = Vector2( 18, -9 )
+position = Vector2( 12, -9 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -10 )
+position = Vector2( 0, -9 )
 scale = Vector2( 0.833333, 0.833333 )
 frames = ExtResource( 1 )
 animation = "Jump"

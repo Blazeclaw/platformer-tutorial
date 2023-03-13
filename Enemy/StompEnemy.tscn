@@ -61,6 +61,7 @@ animation = "Rising"
 
 [node name="Hitbox" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, -9 )
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 4 )
