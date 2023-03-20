@@ -1,7 +1,8 @@
 extends KinematicBody2D
 class_name Player
 
-const FIREBALL_SCENE = preload("res://Player/Fireball.tscn")
+const FIREBALL_SCENE = preload("res://Player/Fireball/Fireball.tscn")
+const FIREBALL_LARGE_SCENE = preload("res://Player/Fireball/FireballLarge.tscn")
 
 enum {MOVE, CLIMB}
 
@@ -13,6 +14,9 @@ var double_jump: int = 1
 var buffered_jump: bool = false
 var coyote_jump: bool = false
 var powered_up: bool = false
+var fireball_charge_time: float = 0.0
+export(float) var charge_duration: float = 2.0
+
 
 onready var animatedSprite := $AnimatedSprite
 onready var ladderCheck := $LadderCheck
@@ -73,12 +77,8 @@ func move_state(input: Vector2, delta: float) -> void:
 		coyote_jump = true
 		coyoteJumpTimer.start()
 
-	if Input.is_action_just_pressed("attack"):
-		var fireball = FIREBALL_SCENE.instance()
-		fireball.global_position = projectileSpawnPosition.global_position
-		fireball.direction = global_transform.x
-		get_tree().current_scene.add_child(fireball)
-		
+	input_attack()
+
 func climb_state(input: Vector2) -> void:
 	if not is_on_ladder():
 		state = MOVE
@@ -109,6 +109,27 @@ func input_double_jump() -> void:
 		SoundPlayer.play_sound(SoundPlayer.JUMP)
 		velocity.y = moveData.JUMP_FORCE
 		double_jump -= 1
+
+func input_attack() -> void:
+	# When attack is pressed, charge the fireball
+	if Input.is_action_just_pressed("attack"):
+		fireball_charge_time = Time.get_unix_time_from_system()
+		
+	# On attack release, shoot the fireball
+	if Input.is_action_just_released("attack"):
+		var fireball
+		var now = Time.get_unix_time_from_system()
+		
+		if now - fireball_charge_time >= charge_duration:
+			# Large fireball
+			fireball = FIREBALL_LARGE_SCENE.instance()
+		else:
+			# Small fireball
+			fireball = FIREBALL_SCENE.instance()
+
+		fireball.global_position = projectileSpawnPosition.global_position
+		fireball.direction = global_transform.x
+		get_tree().current_scene.add_child(fireball)
 
 func buffer_jump() -> void:
 	if Input.is_action_just_pressed("ui_up") and double_jump > 0:

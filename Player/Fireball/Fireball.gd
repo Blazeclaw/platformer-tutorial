@@ -15,8 +15,9 @@ func _ready() -> void:
 func _process(delta):
 	velocity.x = move_toward(velocity.x, max_speed, acceleration * delta)
 	position.x += direction.x * velocity.x
-
-
+	# if timer = 3 scale_size = 1
+	# if fireball.queue_free() timer = false
+	
 func _on_Fireball_body_entered(body: Node) -> void:
 	if body is WalkingEnemy or body.is_in_group("enemies"):
 		body.queue_free()

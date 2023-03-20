@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Fireball",
 "language": "GDScript",
-"path": "res://Player/Fireball.gd"
+"path": "res://Player/Fireball/Fireball.gd"
 }, {
 "base": "Area2D",
 "class": "Ladder",
