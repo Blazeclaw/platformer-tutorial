@@ -15,7 +15,7 @@ var buffered_jump: bool = false
 var coyote_jump: bool = false
 var powered_up: bool = false
 var fireball_charge_time: float = 0.0
-export(float) var charge_duration: float = 2.0
+export(float) var charge_duration: float = 1.5
 
 
 onready var animatedSprite := $AnimatedSprite
@@ -25,6 +25,7 @@ onready var coyoteJumpTimer := $CoyoteJumpTimer
 onready var remoteTransform2D := $RemoteTransform2D
 onready var powerUpTimer := $PowerUpTimer
 onready var projectileSpawnPosition := $ProjectileSpawnPosition
+onready var particles: Blackhole = $ParticleCharge
 
 func _physics_process(delta: float) -> void:
 	var input = Vector2.ZERO
@@ -113,13 +114,15 @@ func input_double_jump() -> void:
 func input_attack() -> void:
 	# When attack is pressed, charge the fireball
 	if Input.is_action_just_pressed("attack"):
+		particles.set_emitting(true)
 		fireball_charge_time = Time.get_unix_time_from_system()
+
 		
 	# On attack release, shoot the fireball
 	if Input.is_action_just_released("attack"):
+		particles.set_emitting(false)
 		var fireball
-		var now = Time.get_unix_time_from_system()
-		
+		var now = Time.get_unix_time_from_system()	
 		if now - fireball_charge_time >= charge_duration:
 			# Large fireball
 			fireball = FIREBALL_LARGE_SCENE.instance()

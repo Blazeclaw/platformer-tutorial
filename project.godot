@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Blackhole",
+"language": "GDScript",
+"path": "res://Player/Fireball/Blackhole.gd"
+}, {
 "base": "StaticBody2D",
 "class": "BreakBlock",
 "language": "GDScript",
@@ -55,6 +60,7 @@ _global_script_classes=[ {
 "path": "res://Enemy/WalkingEnemy.gd"
 } ]
 _global_script_class_icons={
+"Blackhole": "",
 "BreakBlock": "",
 "Fireball": "",
 "Ladder": "",
