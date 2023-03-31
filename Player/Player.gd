@@ -113,17 +113,21 @@ func input_double_jump() -> void:
 
 func input_attack() -> void:
 	# When attack is pressed, charge the fireball
-	if Input.is_action_just_pressed("attack"):
-		particles.set_emitting(true)
-		fireball_charge_time = Time.get_unix_time_from_system()
+	var now = Time.get_unix_time_from_system()
 
-		
+	if Input.is_action_just_pressed("attack"):
+		fireball_charge_time = now
+
+	var charging_time = now - fireball_charge_time
+	if fireball_charge_time > 0 and charging_time > 0.4:
+		particles.set_emitting(true)
+
 	# On attack release, shoot the fireball
 	if Input.is_action_just_released("attack"):
 		particles.set_emitting(false)
 		var fireball
-		var now = Time.get_unix_time_from_system()	
-		if now - fireball_charge_time >= charge_duration:
+		
+		if charging_time >= charge_duration:
 			# Large fireball
 			fireball = FIREBALL_LARGE_SCENE.instance()
 		else:
@@ -133,6 +137,7 @@ func input_attack() -> void:
 		fireball.global_position = projectileSpawnPosition.global_position
 		fireball.direction = global_transform.x
 		get_tree().current_scene.add_child(fireball)
+		fireball_charge_time = 0
 
 func buffer_jump() -> void:
 	if Input.is_action_just_pressed("ui_up") and double_jump > 0:
