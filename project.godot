@@ -75,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Platformer-tutorial"
-run/main_scene="res://Levels/Level1.tscn"
+run/main_scene="res://Levels/Level.tscn"
 config/icon="res://icon.png"
 
 [audio]
