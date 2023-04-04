@@ -35,13 +35,13 @@ position = Vector2( 171, -72 )
 position = Vector2( 801, -72 )
 
 [node name="Spikes" parent="." index="10" instance=ExtResource( 7 )]
-position = Vector2( 801, -72 )
+position = Vector2( 729, 721 )
 
 [node name="Particles2D2" parent="." index="11" instance=ExtResource( 9 )]
 position = Vector2( 802, -355 )
 
 [node name="stick" parent="." index="12" instance=ExtResource( 8 )]
-position = Vector2( 801, -74 )
+position = Vector2( 801, -71 )
 
 [node name="stick2" parent="." index="13" instance=ExtResource( 8 )]
-position = Vector2( 802, -77 )
+position = Vector2( 801, -75 )
