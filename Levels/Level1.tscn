@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=1]
-[ext_resource path="res://TileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://TIleMaps/TileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Spikes/Spikes.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemy/WalkingEnemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Ladder/Ladder.tscn" type="PackedScene" id=5]
@@ -108,7 +108,6 @@ position = Vector2( 198, 0 )
 
 [node name="Particles2D" parent="." index="26" instance=ExtResource( 13 )]
 position = Vector2( 350.32, -73.87 )
-scale = Vector2( 1, 1 )
 
 [node name="Particles2D2" parent="." index="27" instance=ExtResource( 14 )]
 position = Vector2( 348.312, -142.749 )

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=1]
-[ext_resource path="res://TileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://TIleMaps/TileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Common/Door/Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://PowerUps/BreakPowerUp.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Common/BreakBlock/Breakblock.tscn" type="PackedScene" id=5]
