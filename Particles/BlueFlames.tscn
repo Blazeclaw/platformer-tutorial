@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 5
+emission_ring_radius = 2.0
+emission_ring_inner_radius = 0.0
+emission_ring_height = 1.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 150, 90, 0 )
+initial_velocity = 15.0
+orbit_velocity = 0.0
+orbit_velocity_random = 1.0
+linear_accel = -7.48
+linear_accel_random = 1.0
+radial_accel = -25.23
+radial_accel_random = 1.0
+hue_variation = -1.0
+hue_variation_random = 0.01
+
+[node name="BlueFlames" type="Particles2D"]
+modulate = Color( 0, 0.905882, 1, 1 )
+self_modulate = Color( 0, 0.976471, 1, 1 )
+scale = Vector2( 4, 3 )
+amount = 99999
+process_material = SubResource( 1 )

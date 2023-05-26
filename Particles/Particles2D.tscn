@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/fire_particle.png" type="Texture" id=1]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 5
+emission_ring_radius = 50.0
+emission_ring_inner_radius = 70.09
+emission_ring_height = 1.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[node name="Particles2D" type="Particles2D"]
+amount = 1000
+preprocess = 600.0
+randomness = 1.0
+process_material = SubResource( 1 )
+texture = ExtResource( 1 )

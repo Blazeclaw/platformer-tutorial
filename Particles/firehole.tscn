@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 1.0
+orbit_velocity_random = 0.0
+angle = 242.2
+color = Color( 1, 0.494118, 0, 1 )
+
+[node name="firehole" type="Particles2D"]
+scale = Vector2( 1000, 1000 )
+amount = 10
+process_material = SubResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]

@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name WalkingEnemy
 
-export (int) var moveSpeed = 25
+export (int) var moveSpeed = 100
 var direction := Vector2.RIGHT
 var velocity := Vector2.ZERO
 

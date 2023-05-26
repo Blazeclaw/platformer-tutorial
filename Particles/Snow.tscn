@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 5
+emission_ring_radius = 1000.0
+emission_ring_inner_radius = 0.0
+emission_ring_height = 1.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 10000, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[node name="Snow" type="Particles2D"]
+scale = Vector2( 4, 4 )
+amount = 99999
+process_material = SubResource( 1 )

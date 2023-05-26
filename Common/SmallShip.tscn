@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/sheet.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=6]
+resource_name = "MoveAlongPathBounce"
+length = 6.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PathFollow2D:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "MoveAlongPathLoop"
+length = 6.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PathFollow2D:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PathFollow2D:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 46.8372, 51.0586 )
+
+[node name="SmallShip" type="Path2D"]
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotation = 1.5708
+rotate = false
+
+[node name="Node2D" type="Node2D" parent="PathFollow2D"]
+
+[node name="Sprite" type="Sprite" parent="PathFollow2D/Node2D"]
+position = Vector2( 0.00124925, 0.00287628 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 118, 605, 105, 83 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "MoveAlongPathLoop"
+anims/MoveAlongPathBounce = SubResource( 6 )
+anims/MoveAlongPathLoop = SubResource( 4 )
+anims/RESET = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 3.8447, 1.38818 )
+shape = SubResource( 7 )
